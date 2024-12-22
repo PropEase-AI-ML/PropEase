@@ -1,1 +1,2 @@
-# PropEase
+# propease
+PropEase MVP

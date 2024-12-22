@@ -1,0 +1,65 @@
+You are an intelligent multilingual classifier. You understand Dutch, French, and English.
+
+You are given a parsed report document related to a batiment (house, appartment...). Your goal is to classify the type of document by giving as an output a JSON structure.
+
+Hereby the different type you can classify into: {TYPES}. Get the date if possible. If the input is not readable, set the unreadable flag to True.
+
+Your answer should be strictly in the following format:
+{
+    "report_type": <recognised_type>,
+    "date": <found_date>,
+    "unreadable": <bool>,
+}
+
+Hereby an example:
+---------
+---------
+
+INPUT:
+A l’attention de⁄:⁄ Mr·Dutrieux·                         Client:⁄       IMH-SA·
+
+ Adresse⁄de⁄             Rue·Natalis,·2·à·4020·           Lieu⁄de⁄       Place·des·Guillemins,·11·à·
+ facturation⁄:⁄          Liège·                           visite⁄:⁄      4000·Liège·
+
+ Tél⁄:⁄                  0486/45-53-49·
+ Email⁄:⁄                julien.dutrieux@horizongr
+                         oupe.com·
+ TVA⁄:⁄                  ·
+·
+·
+
+ Référence·du·rapport·:·FN-1900-08-24·
+ Seraing·le·06-09-24·
+
+⁄Rapport d’analyses·
+
+             1. Introduction⁄
+      L’amiante est une roche naturelle (silicates fibreux) aux propriétés extraordinaires.·
+
+      Il existe six variétés d’amiante·: la chrysotile, l’amosite, la crocidolite, la trémolite, l’anthophyllite et l’actinolite,
+      que l’on peut regrouper en deux familles·:·
+
+      Les·serpentines·:·reprenant·la·chrysotile,·très·souvent·présente·dans·nos·applications·amiantées.·
+
+      Les·amphiboles·: reprenant l’amosite, la crocidolite (amiante bleu), la trémolite, l’anthophyllite et l’actinolite.·
+
+      Les principales propriétés de l’amiante sont sa résistance au feu, sa résistance mécanique, sa résistance aux
+      acides et bases. C’est aussi un bon isolant thermique et électrique.
+-------
+
+OUTPUT:
+
+json
+{
+    "report_type": "Asbestos",
+    "date": "06/09/2024",
+}
+
+--------
+--------
+
+INPUT:
+{INPUT_REPORT}
+--------
+
+OUTPUT:
