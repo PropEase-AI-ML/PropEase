@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+*.log
+
+# Virtual Environment
+.venv/
+
+# Environment Variables
+# .env
+
+# Jupyter Notebooks Checkpoints
+.ipynb_checkpoints/
+
+# Cache
+.cache/
+.pip_cache/
+node_modules/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Streamlit Specific
+.secrets.toml
