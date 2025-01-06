@@ -9,7 +9,7 @@ __pycache__/
 .venv/
 
 # Environment Variables
-# .env
+.env
 
 # Jupyter Notebooks Checkpoints
 .ipynb_checkpoints/
