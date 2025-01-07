@@ -16,6 +16,8 @@ model = joblib.load(os.getenv("MODEL_PATH"))
 vectorizer = joblib.load(os.getenv("VECTORIZER_PATH"))
 
 os.makedirs("preds", exist_ok=True)
+os.makedirs("uploads", exist_ok=True)
+os.makedirs("extracted", exist_ok=True)
 
 st.markdown("# Main page 🎈")
 st.markdown("""
@@ -37,10 +39,10 @@ if uploaded_file:
     file_path = save_uploaded_file(uploaded_file)
 
     with st.status("Processing... Please wait", expanded=True) as status:
-        result = pytesseract_api_call(uploaded_file.name)
+        result, extracted_file_path = pytesseract_api_call(uploaded_file.name)
         status.update(label="✅ File processed successfully!", state="complete", expanded=False)
 
-        document_content = read_file_content(file_path)
+        document_content = read_file_content(extracted_file_path)
 
         processed_doc = preprocess(document_content)
         doc_vectorized = vectorizer.transform([processed_doc])

@@ -19,9 +19,9 @@ st.markdown(
 uploaded_files = os.listdir("uploads")
 if uploaded_files:
     selected_file = st.selectbox("Select a file to analyze", uploaded_files)
-    file_path = os.path.join("extracted", selected_file.split('.')[0] + '.txt')
+    file_path = os.path.join("extracted", selected_file).replace('.pdf', '.txt')
 
-    with open(os.path.join("preds", selected_file.split('.')[0] + '.json')) as json_file:
+    with open(os.path.join("preds", selected_file).replace('.pdf', '.json')) as json_file:
         preds = json.load(json_file)
     
     st.write("Predicted Metadata")
