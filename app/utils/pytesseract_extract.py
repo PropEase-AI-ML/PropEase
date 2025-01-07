@@ -24,7 +24,9 @@ def pytesseract_api_call(selected_file, max_pages=5):
             ocr_text += f"\n\n--- Page {page_num + 1} ---\n{text}"
 
     os.makedirs("extracted", exist_ok=True)
-    with open(f"{os.path.join('extracted', selected_file.split('.')[0])}.txt", "w") as f:
+    extracted_file_path = f"{os.path.join('extracted', selected_file).replace('.pdf', '.txt')}" # pdf to txt
+
+    with open(extracted_file_path, "w") as f:
         f.write(ocr_text)
     
-    return f"Processing of {selected_file} completed!"
+    return f"Processing of {selected_file} completed!", extracted_file_path

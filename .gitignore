@@ -25,3 +25,8 @@ Thumbs.db
 
 # Streamlit Specific
 .secrets.toml
+
+# Local storage
+extracted/
+preds/
+uploads/

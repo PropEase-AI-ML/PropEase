@@ -1,34 +1,3 @@
-# import re
-# import spacy
-# from langdetect import detect
-# import dateparser
-
-# nlp_fr = spacy.load("fr_core_news_sm")
-# nlp_nl = spacy.load("nl_core_news_sm")
-
-# DATE_REGEX = r"\b(\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}|\d{1,2}\s(?:janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)\s\d{4})\b"
-
-# def extract_dates(text):
-#     lang = detect(text)
-#     nlp = nlp_fr if lang == 'fr' else nlp_nl if lang == 'nl' else None
-    
-#     if not nlp:
-#         return "No date found"
-    
-#     doc = nlp(text)
-#     extracted_dates = [ent.text for ent in doc.ents if ent.label_ == "DATE"]
-#     regex_dates = re.findall(DATE_REGEX, text)
-    
-#     all_dates = extracted_dates + regex_dates
-    
-#     parsed_dates = []
-#     for date in all_dates:
-#         parsed = dateparser.parse(date, languages=[lang])
-#         if parsed:
-#             parsed_dates.append(parsed.strftime("%Y-%m-%d"))
-
-#     return max(parsed_dates) if parsed_dates else "No date found"
-
 import re
 import spacy
 from langdetect import detect
