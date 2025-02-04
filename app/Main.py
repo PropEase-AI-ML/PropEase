@@ -91,6 +91,7 @@ if uploaded_file:
         else:
             expiring_date = extract_expiry_dates(document_content)
 
+        os.makedirs("preds", exist_ok=True)
         with open(f'preds/{uploaded_file.name.replace(".pdf", ".json")}', "w") as json_file:
             json.dump({'report_type': prediction, 'expiring_date': str(expiring_date)}, json_file, indent=4)
 
