@@ -13,11 +13,12 @@ import numpy as np
 
 load_dotenv()
 
-BACKEND_URL = os.getenv("BACKEND_URL")
+# BACKEND_URL = os.getenv("BACKEND_URL")
 
 # Load Model
 model = joblib.load(os.getenv("MODEL_PATH"))
 vectorizer = joblib.load(os.getenv("VECTORIZER_PATH"))
+
 
 def lr_predict(doc_text):
     # Predict probabilities
@@ -36,8 +37,10 @@ def lr_predict(doc_text):
 
     return predictions
 
+
 st.markdown("# Main page 🎈")
-st.markdown("""
+st.markdown(
+    """
     Welcome to the **PropEase**. 
 
     This application allows you to upload text or PDF files for processing and analysis.
@@ -48,22 +51,23 @@ st.markdown("""
     - **PDF** (Portable Document Format)
     
     Once uploaded, you can view or analyze your document by navigating to the respective sections.
-""")
+"""
+)
 
 uploaded_file = st.file_uploader("Upload a Document", type=["pdf"])
 
 headers = {
-    'accept': 'application/json',
+    "accept": "application/json",
 }
 
 if uploaded_file:
-    
+
     # with st.spinner("Processing..."):
     #     try:
     #         files = {
     #             'file': (uploaded_file.name, uploaded_file, 'application/pdf')
     #         }
-            
+
     #         # Send file to the FastAPI backend
     #         response = requests.post(f"{BACKEND_URL}/api/v1/documents/upload", headers=headers, files=files)
 
@@ -74,12 +78,14 @@ if uploaded_file:
     #             st.error(f"Failed to process PDF: {response.status_code}")
     #     except Exception as e:
     #         st.error(f"Error: {e}")
-    
+
     file_path = save_uploaded_file(uploaded_file)
 
     with st.status("Processing... Please wait", expanded=True) as status:
         result, extracted_file_path = pytesseract_api_call(uploaded_file.name)
-        status.update(label="✅ File processed successfully!", state="complete", expanded=False)
+        status.update(
+            label="✅ File processed successfully!", state="complete", expanded=False
+        )
 
         document_content = read_file_content(extracted_file_path)
 
@@ -91,7 +97,14 @@ if uploaded_file:
         else:
             expiring_date = extract_expiry_dates(document_content)
 
-        with open(f'preds/{uploaded_file.name.replace(".pdf", ".json")}', "w") as json_file:
-            json.dump({'report_type': prediction, 'expiring_date': str(expiring_date)}, json_file, indent=4)
+        os.makedirs("preds", exist_ok=True)
+        with open(
+            f'preds/{uploaded_file.name.replace(".pdf", ".json")}', "w"
+        ) as json_file:
+            json.dump(
+                {"report_type": prediction, "expiring_date": str(expiring_date)},
+                json_file,
+                indent=4,
+            )
 
     st.success("File uploaded successfully! Go to the pages to view the document.")
